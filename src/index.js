@@ -3,6 +3,7 @@ import core from './core.js';
 import debugLog from 'debug';
 import { Request } from 'reqlib';
 import url from 'url';
+import { RequestPuppeteer } from './RequestPuppeteer.js';
 
 const
 	debug = debugLog('craigslist'),
@@ -517,7 +518,11 @@ function _getRequestOptions (client, options, query) {
 export class Client {
 	constructor (options) {
 		this.options = options || {};
-		this.request = new Request(this.options);
+		if (this.options.usePuppeteer) {
+			this.request = new RequestPuppeteer(this.options);
+		} else {
+			this.request = new Request(this.options);
+		}
 		this.replyUrl = options.replyUrl;
 	}
 

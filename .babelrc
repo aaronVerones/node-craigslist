@@ -11,5 +11,6 @@
 			}
 		]
 	],
-	"sourceMaps": true
+	"sourceMaps": true,
+	"ignore": ["src/puppeteerEvaluateFunction.js"]
 }
