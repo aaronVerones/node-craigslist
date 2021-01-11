@@ -87,6 +87,10 @@ function _getPostingDetails (postingUrl, markup) {
 	details.replyUrl = ($('#replylink').attr('href') || '').trim();
 	details.title = ($('#titletextonly').text() || '').trim();
 	details.url = postingUrl;
+	details.price = ($(".price")[0].firstChild.data || "")
+    .trim()
+    .replace("$", "");
+  details.price = parseFloat(details.price);
 
 	// populate posting info
 	$('div.postinginfos').find('.postinginfo').each((i, element) => {
