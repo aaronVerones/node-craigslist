@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-import { getDocumentInnerHTML } from './puppeteerEvaluateFunction'
+import { getDocumentInnerHTML } from "./puppeteerEvaluateFunction";
 
 function buildUrl(options) {
   const protocol = options.secure ? "https://" : "http://";
@@ -18,11 +18,13 @@ export class RequestPuppeteer {
   }
 }
 
+let browser;
 export async function loadPageMarkup(url) {
-  const browser = await puppeteer.launch();
+  if (!browser) {
+    browser = await puppeteer.launch();
+  }
   const page = await browser.newPage();
   await page.goto(url);
   const html = await page.evaluate(getDocumentInnerHTML);
-  await browser.close();
   return html;
 }
