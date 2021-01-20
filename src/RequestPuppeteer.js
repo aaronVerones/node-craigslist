@@ -24,6 +24,7 @@ export async function loadPageMarkup(url) {
     browser = await puppeteer.launch();
   }
   const page = await browser.newPage();
+  await page.setDefaultNavigationTimeout(0);
   await page.goto(url);
   const html = await page.evaluate(getDocumentInnerHTML);
   return html;
